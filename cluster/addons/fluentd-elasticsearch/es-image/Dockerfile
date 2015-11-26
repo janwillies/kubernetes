@@ -12,16 +12,18 @@ RUN apt-get update && \
     apt-get clean
 
 RUN cd / && \
-    curl -O https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.0.0/elasticsearch-2.0.0.tar.gz && \
-    tar xf elasticsearch-2.0.0.tar.gz && \
-    rm elasticsearch-2.0.0.tar.gz
+    curl -O https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.1.0/elasticsearch-2.1.0.tar.gz && \
+    tar xf elasticsearch-2.1.0.tar.gz && \
+    rm elasticsearch-2.1.0.tar.gz
 
-COPY elasticsearch.yml /elasticsearch-2.0.0/config/elasticsearch.yml
+COPY elasticsearch.yml /elasticsearch-2.1.0/config/elasticsearch.yml
 COPY run.sh /
 COPY elasticsearch_logging_discovery /
 
 RUN useradd es && \
-    chown -R es:es /elasticsearch-2.0.0 && \
+    chown -R es:es /elasticsearch-2.1.0 && \
+    mkdir /data && \
+    chown -R es:es /data && 
     chown -R es:es /elasticsearch_logging_discovery
 
 USER es
