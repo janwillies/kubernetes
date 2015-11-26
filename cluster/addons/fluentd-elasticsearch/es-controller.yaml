@@ -20,8 +20,8 @@ spec:
         kubernetes.io/cluster-service: "true"
     spec:
       containers:
-      - image: gcr.io/google_containers/elasticsearch:1.7
-        name: elasticsearch-logging         
+      - image: gcr.io/google_containers/elasticsearch:2.1
+        name: elasticsearch-logging
         resources:
           limits:
             cpu: 100m
