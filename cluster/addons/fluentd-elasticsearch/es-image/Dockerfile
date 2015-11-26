@@ -23,7 +23,7 @@ COPY elasticsearch_logging_discovery /
 RUN useradd es && \
     chown -R es:es /elasticsearch-2.1.0 && \
     mkdir /data && \
-    chown -R es:es /data && 
+    chown -R es:es /data && \
     chown -R es:es /elasticsearch_logging_discovery
 
 USER es
