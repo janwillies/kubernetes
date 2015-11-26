@@ -5,3 +5,4 @@ transport.tcp.port: ${TRANSPORT_PORT}
 http.port: ${HTTP_PORT}
 discovery.zen.ping.multicast.enabled: false
 path.data: /data
+network.bind_host: 0.0.0.0
