@@ -164,11 +164,11 @@ const (
 	// DiscoveryRetryInterval specifies how long kubeadm should wait before retrying to connect to the master when doing discovery
 	DiscoveryRetryInterval = 5 * time.Second
 	// PatchNodeTimeout specifies how long kubeadm should wait for applying the label and taint on the master before timing out
-	PatchNodeTimeout = 2 * time.Minute
+	PatchNodeTimeout = 6 * time.Minute
 	// UpdateNodeTimeout specifies how long kubeadm should wait for updating node with the initial remote configuration of kubelet before timing out
-	UpdateNodeTimeout = 2 * time.Minute
+	UpdateNodeTimeout = 6 * time.Minute
 	// TLSBootstrapTimeout specifies how long kubeadm should wait for the kubelet to perform the TLS Bootstrap
-	TLSBootstrapTimeout = 2 * time.Minute
+	TLSBootstrapTimeout = 6 * time.Minute
 
 	// MinimumAddressesInServiceSubnet defines minimum amount of nodes the Service subnet should allow.
 	// We need at least ten, because the DNS service is always at the tenth cluster clusterIP

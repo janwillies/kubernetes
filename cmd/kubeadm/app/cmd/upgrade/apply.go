@@ -42,7 +42,7 @@ import (
 )
 
 const (
-	upgradeManifestTimeout = 5 * time.Minute
+	upgradeManifestTimeout = 10 * time.Minute
 
 	defaultImagePullTimeout = 15 * time.Minute
 )
