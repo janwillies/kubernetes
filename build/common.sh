@@ -362,7 +362,8 @@ function kube::build::docker_delete_old_images() {
 
     if [[ -z "${3:-}" || "${tag}" != "${3}" ]] ; then
       V=2 kube::log::status "Deleting image ${1}:${tag}"
-      "${DOCKER[@]}" rmi "${1}:${tag}" >/dev/null
+      continue
+      # "${DOCKER[@]}" rmi "${1}:${tag}" >/dev/null
     else
       V=3 kube::log::status "Keeping image ${1}:${tag}"
     fi
@@ -428,13 +429,13 @@ function kube::build::destroy_container() {
 
 function kube::build::clean() {
   if kube::build::has_docker ; then
-    kube::build::docker_delete_old_containers "${KUBE_BUILD_CONTAINER_NAME_BASE}"
-    kube::build::docker_delete_old_containers "${KUBE_RSYNC_CONTAINER_NAME_BASE}"
-    kube::build::docker_delete_old_containers "${KUBE_DATA_CONTAINER_NAME_BASE}"
-    kube::build::docker_delete_old_images "${KUBE_BUILD_IMAGE_REPO}" "${KUBE_BUILD_IMAGE_TAG_BASE}"
+    # kube::build::docker_delete_old_containers "${KUBE_BUILD_CONTAINER_NAME_BASE}"
+    # kube::build::docker_delete_old_containers "${KUBE_RSYNC_CONTAINER_NAME_BASE}"
+    # kube::build::docker_delete_old_containers "${KUBE_DATA_CONTAINER_NAME_BASE}"
+    # kube::build::docker_delete_old_images "${KUBE_BUILD_IMAGE_REPO}" "${KUBE_BUILD_IMAGE_TAG_BASE}"
 
     V=2 kube::log::status "Cleaning all untagged docker images"
-    "${DOCKER[@]}" rmi "$("${DOCKER[@]}" images -q --filter 'dangling=true')" 2> /dev/null || true
+    # "${DOCKER[@]}" rmi "$("${DOCKER[@]}" images -q --filter 'dangling=true')" 2> /dev/null || true
   fi
 
   if [[ -d "${LOCAL_OUTPUT_ROOT}" ]]; then
@@ -461,10 +462,10 @@ function kube::build::build_image() {
   kube::build::docker_build "${KUBE_BUILD_IMAGE}" "${LOCAL_OUTPUT_BUILD_CONTEXT}" 'false'
 
   # Clean up old versions of everything
-  kube::build::docker_delete_old_containers "${KUBE_BUILD_CONTAINER_NAME_BASE}" "${KUBE_BUILD_CONTAINER_NAME}"
-  kube::build::docker_delete_old_containers "${KUBE_RSYNC_CONTAINER_NAME_BASE}" "${KUBE_RSYNC_CONTAINER_NAME}"
-  kube::build::docker_delete_old_containers "${KUBE_DATA_CONTAINER_NAME_BASE}" "${KUBE_DATA_CONTAINER_NAME}"
-  kube::build::docker_delete_old_images "${KUBE_BUILD_IMAGE_REPO}" "${KUBE_BUILD_IMAGE_TAG_BASE}" "${KUBE_BUILD_IMAGE_TAG}"
+  # kube::build::docker_delete_old_containers "${KUBE_BUILD_CONTAINER_NAME_BASE}" "${KUBE_BUILD_CONTAINER_NAME}"
+  # kube::build::docker_delete_old_containers "${KUBE_RSYNC_CONTAINER_NAME_BASE}" "${KUBE_RSYNC_CONTAINER_NAME}"
+  # kube::build::docker_delete_old_containers "${KUBE_DATA_CONTAINER_NAME_BASE}" "${KUBE_DATA_CONTAINER_NAME}"
+  # kube::build::docker_delete_old_images "${KUBE_BUILD_IMAGE_REPO}" "${KUBE_BUILD_IMAGE_TAG_BASE}" "${KUBE_BUILD_IMAGE_TAG}"
 
   kube::build::ensure_data_container
   kube::build::sync_to_container
